@@ -8,15 +8,9 @@ import java.util.Scanner;
  * Criar a busca binaria como funçao
  * Passar as opcoes como funçoes.
  * Modificar para OO o trabalho: colocando herança, polimorfismo e encapsulamento (acoplamento?)
- * Usar Random
  * Fazer o programa voltar ao menu principal
  */
-/*
- * Temperaturas de janeiro de 2020:
- * Temperatura do dia 1 = 16 graus celsius.
- * For i = 1 até 31
-  * temperatura de i = temperatura de i + 2;
- */
+
 public class Menu {
 
 	public static void main(String[] args) {
