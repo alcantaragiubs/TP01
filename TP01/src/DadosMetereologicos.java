@@ -9,10 +9,11 @@ public class DadosMetereologicos {
 		listaDataTemperatura.add(oDataTemp);
 		listaDataTemperatura.contains(oDataTemp);//Verifica se um elemento está dentro da lista
 	}
-	public void calcularMediaTemp(DataTemperatura oDataTemp) {
+	public int calcularMediaTemp(DataTemperatura oDataTemp) {//media de um mes de um determinado ano
 		media = oDataTemp.temperatura/oDataTemp.getQtdDiasMes(); //soma das temperaturas???
+		return media;
 	}
-	public void calcularTempMinima(DataTemperatura oDataTemp){
+	public int calcularTempMinima(DataTemperatura oDataTemp){
 		for (oDataTemp.dia = 1; oDataTemp.dia <= oDataTemp.getQtdDiasMes(); oDataTemp.dia++) {
 			if(oDataTemp.temperatura <= temperaturaMinima) {
 				temperaturaMinima = oDataTemp.temperatura;
@@ -21,8 +22,9 @@ public class DadosMetereologicos {
 				temperaturaMinima = temperaturaMinima;
 			}
 		}
+		return temperaturaMinima;
 	}
-	public void calcularTempMaxima(DataTemperatura oDataTemp) {
+	public int calcularTempMaxima(DataTemperatura oDataTemp) {
 		for (oDataTemp.dia = 1; oDataTemp.dia <= oDataTemp.getQtdDiasMes(); oDataTemp.dia++) {
 			if(oDataTemp.temperatura >= temperaturaMaxima) {
 				temperaturaMaxima = oDataTemp.temperatura;
@@ -31,5 +33,6 @@ public class DadosMetereologicos {
 				temperaturaMaxima = temperaturaMaxima;
 			}
 		}
+		return temperaturaMaxima;
 	}
 }
