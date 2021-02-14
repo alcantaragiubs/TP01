@@ -6,7 +6,6 @@ import java.util.Random;
 import java.util.Scanner;
 /*Coisas a fazer:
  * Modificar para OO o trabalho: colocando herança, polimorfismo ??
- * Fazer o programa voltar ao menu principal
  */
 
 
@@ -22,6 +21,7 @@ public class TP1 {
 			oDadosMetereologicos.adicionarDataTemp( oDataTemp );
 		}
 	}
+	
 	public static void Menu() {
 		int opcao;
 		boolean taDentro = false;
@@ -79,7 +79,7 @@ public class TP1 {
 	}
 	public static int EntradaDeTeperaturas() { 
 		boolean repetirProcesso = true;
-		int dia, mes, ano, temperatura;
+		int mes, ano, temperatura;
 		Scanner ler = new Scanner(System.in);
 		char processo;
 		System.out.println("Aqui, você poderá entrar com os dados solicitados pelo programa.");
@@ -90,22 +90,27 @@ public class TP1 {
 			System.out.println();
 			System.out.print("- Ano: ");
 			ano = ler.nextInt();
-			DataTemperatura dataMesAno = new DataTemperatura(mes, ano);
-			dataMesAno.validaData(mes, ano);
-			System.out.println();
-			for (int i = 0; i < dataMesAno.getQtdDiasMes(); i++) { //NAO ESTA ENTRANDO NO FOR - NAO CONSEGUI IDENTIFICAR O PORQUE
-				System.out.print("Entre com o dia e a média da temperatura escolhidos: - Dia: ");
-				dia = ler.nextInt();
-				DataTemperatura dataCompleta = new DataTemperatura(dia, mes, ano);
-				dataCompleta.validaDia(dia);
-				System.out.println();
-				System.out.print("- Temperatura (em graus): ");
-				temperatura = ler.nextInt();
-				DataTemperatura dataTemperatura = new DataTemperatura(dia, mes, ano, temperatura);
-				dataTemperatura.setTemperatura(temperatura);
-				System.out.println();
+			while (!DataTemperatura.mesAnoValidos(mes, ano)) {
+				while(mes < 1 || mes > 12) {
+					System.out.print("Mês Inválido! Digite outro: ");
+					mes = ler.nextInt();
+					System.out.println();
+				}
+				while(ano < 2011 || ano > 2020) {
+					System.out.print("Ano Inválido! Digite outro: ");
+					ano = ler.nextInt();
+					System.out.println();
+				}
 			}
-			System.out.print("Você deseja repetir o processo? (Digite um caracter - s/n - simbolizando sua resposta) ");
+			System.out.println();
+			for (int dia = 1; dia <= DataTemperatura.getQtdDiasMes(mes,ano); dia++) { //NAO ESTA ENTRANDO NO FOR - NAO CONSEGUI IDENTIFICAR O PORQUE
+				System.out.print("Entre com o dia média da temperatura do dia " + dia + ": ");
+				temperatura = ler.nextInt();
+				System.out.println();
+				DataTemperatura oDataTemperatura = new DataTemperatura(dia, mes, ano, temperatura);
+				oDadosMetereologicos.adicionarDataTemp(oDataTemperatura);
+			}
+			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
 			if(processo == 's') {
 				repetirProcesso = true;
@@ -137,7 +142,7 @@ public class TP1 {
 			//DataTemperatura dataTemperatura = new DataTemperatura(dia, mes, ano, temperatura);
 			//dataTemperatura.validaData(mes, ano);
 			//System.out.println("A média aritmética da temperatura da data" + dataMesAno.mes + "/" + dataMesAno.ano + " é: " + media + "."); 
-			System.out.print("Você deseja repetir o processo? (Digite um caracter - s/n - simbolizando sua resposta) ");
+			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
 			if(processo == 's') {
 				repetirProcesso = true;
@@ -170,7 +175,7 @@ public class TP1 {
 			//dataTemperatura.validaData(mes, ano);
 			//System.out.println("A temperatura mínima da data " + dataTemperatura.mes + "/" + dataTemperatura.ano + ", foi no dia " + dataTemperatura.dia + " e correspondeu à: " + temperatura + " graus Celsius.");
 			//System.out.println();
-			System.out.print("Você deseja repetir o processo? (Digite um caracter - s/n - simbolizando sua resposta) ");
+			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
 			if(processo == 's') {
 				repetirProcesso = true;
@@ -203,7 +208,7 @@ public class TP1 {
 			//dataTemperatura.validaData(mes, ano);
 			//System.out.println("A temperatura máxima da data " + dataTemperatura.mes + "/" + dataTemperatura.ano + ", foi no dia " + dataTemperatura.dia + " e correspondeu à: " + temperatura + " graus Celsius.");
 			//System.out.println();
-			System.out.print("Você deseja repetir o processo? (Digite um caracter - s/n - simbolizando sua resposta) ");
+			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
 			if(processo == 's') {
 				repetirProcesso = true;
@@ -233,7 +238,7 @@ public class TP1 {
 			System.out.println("- Ano: ");
 			ano = ler.nextInt();
 			DataTemperatura dataMesAno = new DataTemperatura(mes, ano);
-			dataMesAno.validaData(mes, ano);
+			dataMesAno.mesAnoValidos(mes, ano);
 			System.out.println("Relatório Meteorológico:");
 			System.out.println("1 - Temperaturas médias de cada dia do mês:");
 			//for(i = 1; i <= dataMesAno.getQtdDiasMes(); i++){
@@ -245,7 +250,7 @@ public class TP1 {
 			//System.out.println("3 - Temperatura mínima do mês: " + .calcularTempMinima + "grauCelsius."); - COMO COLOCAR AQUI O TEMPERATURA MINIMA
 			System.out.println();
 			//System.out.println("4 - Temperatura máxima do mês: " + .calcularTempMaxima + "grauCelsius."); - COMO COLOCAR AQUI O TEMPERATURA MAXIMA
-			System.out.print("Você deseja ver outro reatório? (Digite um caracter - s/n - simbolizando sua resposta) ");
+			System.out.print("Você deseja ver outro relatório? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
 			if(processo == 's') {
 				repetirProcesso = true;
