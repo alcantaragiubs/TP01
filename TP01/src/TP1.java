@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class TP1 {
 	static DadosMetereologicos oDadosMetereologicos = new DadosMetereologicos();
-
 	private static void GeraDadosJaneiro2020() {
 		int ano = 2020;
 		int mes = 1;
@@ -24,6 +23,7 @@ public class TP1 {
 	
 	public static void Menu() {
 		int opcao;
+		GeraDadosJaneiro2020();
 		boolean taDentro = false;
 		Scanner ler = new Scanner(System.in);
 		System.out.println("Bem-vindo, Bem-vinda ou Bem-vinde ao Menu Principal do INMTE da Giulia!");
@@ -153,8 +153,8 @@ public class TP1 {
 				}
 			}
 			System.out.println();
-			DadosMetereologicos media = new DadosMetereologicos();
-			System.out.println("A média aritmética da temperatura da data " + mes + "/" + ano + " é: " + media.calcularMediaTempMesAno(mes, ano)+ "."); 
+			
+			System.out.println("A média aritmética da temperatura da data " + mes + "/" + ano + " é: " + oDadosMetereologicos.calcularMediaTempMesAno(mes, ano)+ "."); 
 			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
 			if(processo == 'n') {
@@ -198,8 +198,7 @@ public class TP1 {
 				}
 			}
 			System.out.println();
-			DadosMetereologicos tempMinima = new DadosMetereologicos();
-	//		System.out.println("A temperatura mínima da data " + mes + "/" + ano + ", foi no dia " + dia + " e correspondeu à: " + tempMinima.calcularTempMinima() + " graus Celsius.");
+			System.out.println("A temperatura mínima da data " + mes + "/" + ano + ",  correspondeu à: " + oDadosMetereologicos.calcularTempMinimaMesAno(mes, ano)+ " graus Celsius.");
 			System.out.println();
 			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
@@ -244,8 +243,7 @@ public class TP1 {
 				}
 			}
 			System.out.println();
-			DadosMetereologicos tempMinima = new DadosMetereologicos();
-	//		System.out.println("A temperatura máxima da data " + mes + "/" + ano + ", foi no dia " + dia + " e correspondeu à: " + tempMinima.calcularTempMinima() + " graus Celsius.");
+			System.out.println("A temperatura máxima da data " + mes + "/" + ano + ",  correspondeu à: " + oDadosMetereologicos.calcularTempMaximaMesAno(mes, ano) + " graus Celsius.");
 			System.out.println();
 			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
@@ -292,22 +290,21 @@ public class TP1 {
 			System.out.println();
 			System.out.println("Relatório Meteorológico:");
 			System.out.println("1 - Temperaturas médias de cada dia do mês:");
-		//	DataTemperatura media = new DataTemperatura(dia, mes, ano, temperatura);
-	//		for(int i = 1; i <= DataTemperatura.getQtdDiasMes(mes,ano); i++){
-	//			System.out.println("Dia " + i + "Temperatura média: " + media.setTemperatura(temperatura));
-	//		}
-			System.out.println(); //- fora do looping
-			//System.out.println("2 - Temperatura média do mês: " + .calcularMediaTemp + "grausCelsius."); - COMO COLOCAR AQUI O CALCULAR MEDIA
+			for(int i = 1; i <= DataTemperatura.getQtdDiasMes(mes,ano); i++){
+				System.out.println("Dia " + i + " Temperatura média: " + DataTemperatura.getTemperatura());
+			}
 			System.out.println();
-			//System.out.println("3 - Temperatura mínima do mês: " + .calcularTempMinima + "grauCelsius."); - COMO COLOCAR AQUI O TEMPERATURA MINIMA
+			System.out.println("2 - Temperatura média do mês: " + oDadosMetereologicos.calcularMediaTempMesAno(mes, ano) + " grausCelsius."); 
 			System.out.println();
-			//System.out.println("4 - Temperatura máxima do mês: " + .calcularTempMaxima + "grauCelsius."); - COMO COLOCAR AQUI O TEMPERATURA MAXIMA
+			System.out.println("3 - Temperatura mínima do mês: " + oDadosMetereologicos.calcularTempMinimaMesAno(mes, ano) + " grauCelsius."); 
+			System.out.println();
+			System.out.println("4 - Temperatura máxima do mês: " + oDadosMetereologicos.calcularTempMaximaMesAno(mes, ano) + " grauCelsius."); 
 			System.out.print("Você deseja ver outro relatório? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
-			if(processo == 'n') {
+			if(processo == 's') {
 				repetirProcesso = true;
 			}
-			else if(processo == 's') {
+			else if(processo == 'n') {
 				repetirProcesso = false;
 				System.out.println("---------------------------------------------------------------------------------------");
 				Menu();

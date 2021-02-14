@@ -13,31 +13,30 @@ public class DadosMetereologicos {
 		int somaTemperaturas = 0;
 		int qtdDias = 0;
 		for(DataTemperatura oDataTemperatura : listaDataTemperatura) {
-			//if(mes = )
-			somaTemperaturas += oDataTemperatura.getTemperatura();
-			qtdDias++;			
+			if(mes == oDataTemperatura.mes) {
+				somaTemperaturas += oDataTemperatura.getTemperatura();
+				qtdDias++;
+			}			
 		}
 		media = somaTemperaturas/DataTemperatura.getQtdDiasMes(mes, ano); 
 		return media;
 	}
-	public int calcularTempMinima(DataTemperatura oDataTemp){
+	public int calcularTempMinimaMesAno(int mes, int ano){
 		for (DataTemperatura oDataTemperatura : listaDataTemperatura) {
-			if(oDataTemp.temperatura <= temperaturaMinima) {
-				temperaturaMinima = oDataTemp.temperatura;
-			}
-			else {
-				temperaturaMinima = temperaturaMinima;
+			if(mes == oDataTemperatura.mes) {
+				if(oDataTemperatura.temperatura <= temperaturaMinima) {
+					temperaturaMinima = oDataTemperatura.temperatura;
+				}
 			}
 		}
 		return temperaturaMinima;
 	}
-	public int calcularTempMaxima(DataTemperatura oDataTemp) {
+	public int calcularTempMaximaMesAno(int mes, int ano) {
 		for (DataTemperatura oDataTemperatura : listaDataTemperatura) {
-			if(oDataTemp.temperatura >= temperaturaMaxima) {
-				temperaturaMaxima = oDataTemp.temperatura;
-			}
-			else {
-				temperaturaMaxima = temperaturaMaxima;
+			if(mes == oDataTemperatura.mes) {
+				if(oDataTemperatura.temperatura >= temperaturaMaxima) {
+					temperaturaMaxima = oDataTemperatura.temperatura;
+				}
 			}
 		}
 		return temperaturaMaxima;

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class DataTemperatura {
-	int dia, mes, ano, temperatura;
+	int dia, mes, ano;
+	static int temperatura;
 	Scanner ler = new Scanner(System.in);
 	public DataTemperatura(int dia, int mes, int ano) {	
 		this.ano = ano;
@@ -41,7 +42,7 @@ public class DataTemperatura {
 	public void setTemperatura(int temperatura) {
 		this.temperatura = temperatura;
 	}
-	public int getTemperatura() {
+	public static int getTemperatura() {
 		return temperatura;
 	}
 }
