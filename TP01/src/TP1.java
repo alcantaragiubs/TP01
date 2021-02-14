@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Fazer o programa voltar ao menu principal
  */
 
-public class Menu {
+public class TP1 {
 
 	public static void main(String[] args) {
 		
