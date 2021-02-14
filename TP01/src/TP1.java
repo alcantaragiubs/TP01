@@ -27,7 +27,7 @@ public class TP1 {
 		}
 	}
 
-	public static int EntradaDeTeperaturas() {
+	public static int EntradaDeTeperaturas() { //problema na validaçao
 		boolean repetirProcesso = true;
 		int dia, mes, ano, temperatura;
 		Scanner ler = new Scanner(System.in);
@@ -37,15 +37,17 @@ public class TP1 {
 		while(repetirProcesso) {
 			System.out.print("Agora digite a data desejada: - Mês: ");
 			mes = ler.nextInt();
-			System.out.println("- Ano: ");
+			System.out.print("- Ano: ");
 			ano = ler.nextInt();
 			DataTemperatura dataMesAno = new DataTemperatura(mes, ano);
+			dataMesAno.validaData(mes, ano);
 			System.out.println();
 			for (int i = 1; i <= dataMesAno.getQtdDiasMes(); i++) {
 				System.out.print("Entre com o dia e a média da temperatura escolhidos: - Dia: ");
 				dia = ler.nextInt();
 				DataTemperatura dataCompleta = new DataTemperatura(dia, mes, ano);
-				System.out.println("- Temperatura (em graus): ");
+				dataCompleta.validaDia(dia);
+				System.out.print("- Temperatura (em graus): ");
 				temperatura = ler.nextInt();
 				DataTemperatura dataTemperatura = new DataTemperatura(dia, mes, ano, temperatura);
 				dataTemperatura.setTemperatura(temperatura);
@@ -79,10 +81,6 @@ public class TP1 {
 			System.out.println("- Ano: ");
 			ano = ler.nextInt();
 			//validar data
-			// busca binaria para encontrar os dias e as temperaturas registradas
-			// fazer a soma das temperaturas do mes
-			// descobrir quantos dias tem o mes desejado
-			//media = somaTemperaturas/diasMes;
 			//System.out.println("A média aritmética da temperatura da data" + mes + "/" + ano + " é: " + media + "."); 
 			System.out.print("Você deseja repetir o processo? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
@@ -111,11 +109,7 @@ public class TP1 {
 			mes = ler.nextInt();
 			System.out.println("- Ano: ");
 			ano = ler.nextInt();
-			//validar data
-			//busca binaria para encontrar as temperaturas correspondentes ao mes e ano desejados
-			//for de i que vai do dia 1 ao dia x (ultimo dia do mes)
-			//se a temperatura do dia i for menor que temperaturaMinima -> temperaturaMinima = temperatura do dia i
-			//se nao -> temperaturaMinima = temperaturaMinima
+			
 			//System.out.println("A temperatura mínima da data " + mes + "/" + ano + ", foi no dia " + dia + " e correspondeu à: " + temperatura + " graus Celsius.");
 			//System.out.println();
 			System.out.print("Você deseja repetir o processo? (Digite um caracter - s/n - simbolizando sua resposta) ");
@@ -146,11 +140,6 @@ public class TP1 {
 			mes = ler.nextInt();
 			System.out.println("- Ano: ");
 			ano = ler.nextInt();
-			//validar data
-			//busca binaria para encontrar as temperaturas correspondentes ao mes e ano desejados
-			//for de i que vai do dia 1 ao dia x (ultimo dia do mes)
-			//se a temperatura do dia i for maior que temperaturaMaxima -> temperaturaMaxima = temperatura do dia i
-			//se nao -> temperaturaMaxima = temperaturaMaxima
 			//System.out.println("A temperatura máxima da data " + mes + "/" + ano + ", foi no dia " + dia + " e correspondeu à: " + temperatura + " graus Celsius.");
 			//System.out.println();
 			System.out.print("Você deseja repetir o processo? (Digite um caracter - s/n - simbolizando sua resposta) ");
@@ -209,9 +198,8 @@ public class TP1 {
 	}
 	public static void main(String[] args) {
 
-		int opcao, media, diasMes;
-		int somaTemperaturas = 0, temperaturaMinima = 500, temperaturaMaxima = -273;
-		boolean taDentro = false, repetirProcesso = true;
+		int opcao;
+		boolean taDentro = false;
 		Scanner ler = new Scanner(System.in);
 
 		GeraDadosJaneiro2020();
