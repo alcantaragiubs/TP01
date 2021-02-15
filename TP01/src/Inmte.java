@@ -200,7 +200,8 @@ public class Inmte {
 				}
 			} 
 			System.out.println();
-			System.out.println("A temperatura mínima da data " + mes + "/" + ano + ",  correspondeu à: " + oDadosMetereologicos.calcularTempMinimaMesAno(mes, ano)+ " graus Celsius.");
+			DataTemperatura oDataTempMin = oDadosMetereologicos.calcularTempMinimaMesAno(mes, ano);
+			System.out.println("A temperatura mínima foi na data " + oDataTempMin.getDia() + "/" + mes + "/" + ano + ",  e correspondeu à: " + oDataTempMin.getTemperatura() + " graus Celsius.");
 			System.out.println();
 			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
@@ -245,7 +246,8 @@ public class Inmte {
 				}
 			}
 			System.out.println();
-			System.out.println("A temperatura máxima da data " + mes + "/" + ano + ",  correspondeu à: " + oDadosMetereologicos.calcularTempMaximaMesAno(mes, ano) + " graus Celsius.");
+			DataTemperatura oDataTempMax = oDadosMetereologicos.calcularTempMaximaMesAno(mes, ano);
+			System.out.println("A temperatura mínima foi na data " + oDataTempMax.getDia() + "/" + mes + "/" + ano + ",  e correspondeu à: " + oDataTempMax.getTemperatura() + " graus Celsius.");
 			System.out.println();
 			System.out.print("Você deseja voltar ao menu principal? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
@@ -296,15 +298,16 @@ public class Inmte {
 			ArrayList<DataTemperatura> listaDataTemperatura = oDadosMetereologicos.getListaDataTemperaturaMesAno(mes, ano);
 			
 			for(DataTemperatura oDataTemperatura : listaDataTemperatura){
-				System.out.println("Dia " + oDataTemperatura.dia + " Temperatura média: " + oDataTemperatura.temperatura);
+				System.out.println("Dia " + oDataTemperatura.getDia() + " Temperatura média: " + oDataTemperatura.temperatura);
 			}
-			
+			DataTemperatura oDataTempMin = oDadosMetereologicos.calcularTempMinimaMesAno(mes, ano);
+			DataTemperatura oDataTempMax = oDadosMetereologicos.calcularTempMaximaMesAno(mes, ano);
 			System.out.println();
-			System.out.println("2 - Temperatura média do mês: " + oDadosMetereologicos.calcularMediaTempMesAno(mes, ano) + " grausCelsius."); 
+			System.out.println("2 - Temperatura média do mês: " + oDadosMetereologicos.calcularMediaTempMesAno(mes, ano) + " graus Celsius."); 
 			System.out.println();
-			System.out.println("3 - Temperatura mínima do mês: " + oDadosMetereologicos.calcularTempMinimaMesAno(mes, ano) + " grauCelsius."); 
+			System.out.println("3 - Temperatura mínima do mês: " + oDataTempMin.getTemperatura() + " graus Celsius."); 
 			System.out.println();
-			System.out.println("4 - Temperatura máxima do mês: " + oDadosMetereologicos.calcularTempMaximaMesAno(mes, ano) + " grauCelsius."); 
+			System.out.println("4 - Temperatura máxima do mês: " + oDataTempMax.getTemperatura() + " graus Celsius."); 
 			System.out.print("Você deseja ver outro relatório? (Digite um caracter - s/n - simbolizando sua resposta) ");
 			processo = ler.next().charAt(0);
 			if(processo == 's') {

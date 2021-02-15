@@ -7,7 +7,7 @@ public class DadosMetereologicos {
 	public ArrayList<DataTemperatura> getListaDataTemperaturaMesAno(int mes, int ano) {
 		ArrayList<DataTemperatura> listaDataTemperaturaMesAno = new ArrayList<>();
 		for (DataTemperatura oDataTemperatura : listaDataTemperatura) {
-			if(mes == oDataTemperatura.mes) { // tem que comparar o ano tambem
+			if(mes == oDataTemperatura.getMes()) { // tem que comparar o ano tambem
 				listaDataTemperaturaMesAno.add(oDataTemperatura);
 			}
 		}
@@ -22,7 +22,7 @@ public class DadosMetereologicos {
 		int somaTemperaturas = 0;
 		int qtdDias = 0;
 		for(DataTemperatura oDataTemperatura : listaDataTemperatura) {
-			if(mes == oDataTemperatura.mes && ano == oDataTemperatura.ano) {
+			if(mes == oDataTemperatura.getMes() && ano == oDataTemperatura.getAno()) {
 				somaTemperaturas += oDataTemperatura.getTemperatura();
 				qtdDias++;
 			}			
@@ -31,24 +31,21 @@ public class DadosMetereologicos {
 		return media;
 	}
 	public DataTemperatura calcularTempMinimaMesAno(int mes, int ano){
-		DataTemperatura oDataTemperaturaMinima = new DataTemperatura();
+		DataTemperatura oDataTemperaturaMinima = new DataTemperatura(0,0,0,500);
 		for (DataTemperatura oDataTemperatura : listaDataTemperatura) {
-			if(mes == oDataTemperatura.mes && ano == oDataTemperatura.ano) {
-				if(oDataTemperatura.temperatura <= temperaturaMinima) {
+			if(mes == oDataTemperatura.getMes() && ano == oDataTemperatura.getAno() && oDataTemperatura.temperatura <= oDataTemperaturaMinima.getTemperatura()) {
 					oDataTemperaturaMinima = oDataTemperatura;
-				}
 			}
 		}
 		return oDataTemperaturaMinima;
 	}
-	public int calcularTempMaximaMesAno(int mes, int ano) {
+	public DataTemperatura calcularTempMaximaMesAno(int mes, int ano) {
+		DataTemperatura oDataTemperaturaMaxima = new DataTemperatura(0,0,0,-273);
 		for (DataTemperatura oDataTemperatura : listaDataTemperatura) {
-			if(mes == oDataTemperatura.mes && ano == oDataTemperatura.ano) {
-				if(oDataTemperatura.temperatura >= temperaturaMaxima) {
-					temperaturaMaxima = oDataTemperatura.temperatura;
-				}
+			if(mes == oDataTemperatura.getMes() && ano == oDataTemperatura.getAno() && oDataTemperatura.temperatura >= oDataTemperaturaMaxima.getTemperatura()) {
+				oDataTemperaturaMaxima = oDataTemperatura;
 			}
 		}
-		return temperaturaMaxima;
+		return oDataTemperaturaMaxima;
 	}
 }
