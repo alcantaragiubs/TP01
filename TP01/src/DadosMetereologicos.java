@@ -7,7 +7,7 @@ public class DadosMetereologicos {
 	public ArrayList<DataTemperatura> getListaDataTemperaturaMesAno(int mes, int ano) {
 		ArrayList<DataTemperatura> listaDataTemperaturaMesAno = new ArrayList<>();
 		for (DataTemperatura oDataTemperatura : listaDataTemperatura) {
-			if(mes == oDataTemperatura.getMes()) { // tem que comparar o ano tambem
+			if(mes == oDataTemperatura.getMes() && ano == oDataTemperatura.getAno()) { 
 				listaDataTemperaturaMesAno.add(oDataTemperatura);
 			}
 		}
